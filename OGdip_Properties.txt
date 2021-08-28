@@ -1,0 +1,248 @@
+; List of Image properties used by OGdip
+; 
+; See also: https://docs.microsoft.com/en-us/windows/win32/gdiplus/-gdiplus-constant-property-item-descriptions
+; 
+; Columns: <PROPID> <TYPE> <LENGTH> <NAME> <DESCRIPTION>
+;   - PROPID      - Hexadecimal id of the property
+;   - TYPE        - First letter of the property type: Byte, Short, Long, Rational, ASCII; Z stands for signed Rational.
+;                   Some properties may vary in type (ex. ImageWidth can be of either Short or Long type).
+;   - LENGTH      - Number of <TYPE> elements in the property.
+;                   'L' means the length of the ASCII string including the null-terminator.
+;   - NAME        - Property name.
+;   - DESCRIPTION - Property description.
+
+0x0000   B   4   GpsVer                      Version of GPS IFD as four bytes (ex. 2.0.0.0 = 0x02000000). Required if @GpsIFD is present.
+0x0001   A   2   GpsLatitudeRef              Single char: 'N'/'S' - latitude is north/south.
+0x0002   R   3   GpsLatitude                 Latitude as three rationals: degrees, minutes and seconds, formatted as [DD/1, MM/1, SS/1] or [DD/1, MMMM/100, 0/1].
+0x0003   A   2   GpsLongitudeRef             Single char: 'E'/'W' - longitude is east/west.
+0x0004   R   3   GpsLongitude                Longitude as three rationals: degrees, minutes and seconds, formatted as [DDD/1, MM/1, SS/1] or [DDD/1, MMMM/100, 0/1]
+0x0005   B   1   GpsAltitudeRef              Reference altitude, in meters.
+0x0006   R   1   GpsAltitude                 Altitude, in meters, based on the reference altitude.
+0x0007   R   3   GpsGpsTime                  UTC-time as three rationals: hours, minutes and seconds.
+0x0008   A   L   GpsGpsSatellites            GPS satellites information. Format is not specified. Can be NULL.
+0x0009   A   2   GpsGpsStatus                Single char: 'A'/'V' - GPS receiver is measuring/interoperable.
+0x000A   A   2   GpsGpsMeasureMode           Single char: '2'/'3' - GPS measurement is 2D/3D.
+0x000B   R   1   GpsGpsDop                   GPS DOP (data degree of precision) - HDOP for 2D, PDOP for 3D measurement.
+0x000C   A   2   GpsSpeedRef                 Single char: 'K'/'M'/'N' - unit of @GpsSpeed is kmph/mph/knots.
+0x000D   R   1   GpsSpeed                    Speed of the GPS receiver movement.
+0x000E   A   2   GpsTrackRef                 Single char: 'T'/'M' - reference of @GpsTrack is true/magnetic direction.
+0x000F   R   1   GpsTrack                    Direction of GPS receiver movement: from 0.00 to 359.99.
+0x0010   A   2   GpsImgDirRef                Single char: 'T'/'M' - reference of @ImgDir is true/magnetic direction.
+0x0011   R   1   GpsImgDir                   Direction of the image when it was captured: from 0.00 to 359.99.
+0x0012   A   L   GpsMapDatum                 Geodetic survey data used by the GPS receiver (ex. 'TOKYO', 'WGS-84').
+0x0013   A   2   GpsDestLatRef               Single char: 'N'/'S' - latitude of @GpsDestLat is north/south.
+0x0014   R   3   GpsDestLat                  Latitude of the destination point; see @GpsLatitude for format.
+0x0015   A   2   GpsDestLongRef              Single char: 'E'/'W' - longitude of @GpsDestLong is east/west.
+0x0016   R   3   GpsDestLong                 Longitude of the destination point; see @GpsLongitude for format.
+0x0017   A   2   GpsDestBearRef              Single char: 'T'/'M' - reference of @GpsDestBear is true/magnetic direction.
+0x0018   R   1   GpsDestBear                 Bearing to the destination point: from 0.00 to 359.99.
+0x0019   A   2   GpsDestDistRef              Single char: 'K'/'M'/'N' - unit of @GpsDestDist is kilometer/mile/knot.
+0x001A   R   1   GpsDestDist                 Distance to the destination point.
+0x001B   ?   ?   GpsProcessingMethod         
+0x001C   ?   ?   GpsAreaInformation          
+0x001D   ?   ?   GpsDate                     
+0x001E   ?   ?   GpsDifferential             
+0x00FE   L   1   NewSubfileType              Type of data in a subfile.
+0x00FF   S   1   SubfileType                 Type of data in a subfile.
+0x0100   SL  1   ImageWidth                  Number of pixels per row.
+0x0101   SL  1   ImageHeight                 Number of pixel rows.
+0x0102   S   ?   BitsPerSample               Number of bits per color component. See also @SamplesPerPixel.
+0x0103   S   1   Compression                 Compression scheme used for the image data.
+0x0106   S   1   PhotometricInterp           How pixel data will be interpreted.
+0x0107   S   1   ThreshHolding               Technique used to convert from gray pixels to black and white pixels.
+0x0108   S   1   CellWidth                   Width of the dithering or halftoning matrix.
+0x0109   S   1   CellHeight                  Height of the dithering or halftoning matrix.
+0x010A   S   1   FillOrder                   Logical order of bits in a byte.
+0x010D   A   L   DocumentName                Name of the document from which the image was scanned.
+0x010E   A   L   ImageDescription            Title of the image.
+0x010F   A   L   EquipMake                   Manufacturer of the image recording equipment.
+0x0110   A   L   EquipModel                  Model name/number of the image recording equipment.
+0x0111   SL  ?   StripOffsets                For each strip, byte offset of that strip. See also @RowsPerStrip and @StripBytesCount
+0x0112   S   1   Orientation                 Image orientation. 1: Normal, 2: FlipX, 3: FlipXY, 4: FlipY, 5: R90+FlipX, 6: R90, 7: R90+FlipY, 8: R90+FlipXY.
+0x0115   S   1   SamplesPerPixel             Number of color components per pixel.
+0x0116   SL  1   RowsPerStrip                Number of rows per strip.
+0x0117   SL  ?   StripBytesCount             For each strip, the total number of bytes in that strip.
+0x0118   S   ?   MinSampleValue              For each color component, the minimum value assigned to that component.
+0x0119   S   ?   MaxSampleValue              For each color component, the maximum value assigned to that component.
+0x011A   R   1   XResolution                 Number of pixels per unit in X-direction. Unit is set by @ResolutionUnit.
+0x011B   R   1   YResolution                 Number of pixels per unit in Y-direction. Unit is set by @ResolutionUnit.
+0x011C   S   1   PlanarConfig                Whether pixel components are recorded in planar (1: RGBRGB) or chunky (2: RRGGBB) format.
+0x011D   A   L   PageName                    Name of the page from which the image was scanned.
+0x011E   R   1   XPosition                   Offset from the page's left side to the image's left side. Unit is set by @ResolutionUnit.
+0x011F   R   1   YPosition                   Offset from the page's top  side to the image's  top side. Unit is set by @ResolutionUnit.
+0x0120   L   ?   FreeOffset                  For each string of contiguous unused bytes, the byte offset of that string.
+0x0121   L   ?   FreeByteCounts              For each string of contiguous unused bytes, the number of bytes in that string.
+0x0122   S   1   GrayResponseUnit            Precision of the @GrayResponseCurve as 10^-N (ex. value of 2 specifies 1/100ths).
+0x0123   S   ?   GrayResponseCurve           For each possible pixel value in a grayscale image, the optical density of that pixel value.
+0x0124   L   1   T4Option                    Set of flags that relate to T4 encoding.
+0x0125   L   1   T6Option                    Set of flags that relate to T6 encoding.
+0x0128   S   1   ResolutionUnit              Unit of measure for @[XY]Resolution, @[XY]Position. 2: inch, 3: centimeter.
+0x0129   S   1   PageNumber                  Page number of the page from which the image was scanned.
+0x012D   S   ?   TransferFunction            Tables that specify transfer functions for the image.
+0x0131   A   L   SoftwareUsed                Name and version of the software used to create the image.
+0x0132   A   20  DateTime                    Date and time the image was created ('YYYY:MM:DD hh:mm:ss').
+0x013B   A   L   Artist                      Name of the person who created the image.
+0x013C   A   L   HostComputer                Computer and/or OS used to create the image.
+0x013D   S   1   Predictor                   Type of prediction scheme that was applied to the image data before the encoding scheme was applied.
+0x013E   R   2   WhitePoint                  Chromaticity of the white point of the image.
+0x013F   R   6   PrimaryChromaticities       For each of the three primary colors in the image, the chromaticity of that color.
+0x0140   S   ?   ColorMap                    Color palette (lookup table) for a palette-indexed image.
+0x0141   S   2   HalftoneHints               Information used by the halftone function.
+0x0142   SL  1   TileWidth                   Number of pixel columns in each tile.
+0x0143   SL  1   TileLength                  Number of pixel rows in each tile.
+0x0144   L   ?   TileOffset                  For each tile, the byte offset of that tile.
+0x0145   SL  ?   TileByteCounts              For each tile, the number of bytes in that tile.
+0x014C   S   1   InkSet                      Set of inks used in a separated image.
+0x014D   A   ?   InkNames                    Sequence of null-terminated names of the inks used in a separated image.
+0x014E   S   1   NumberOfInks                Number of inks.
+0x0150   BS  ?   DotRange                    Color component values that correspond to a 0%-dot and a 100%-dot. Property size may depend on @SamplesPerPixel.
+0x0151   A   L   TargetPrinter               Intended printing environment.
+0x0152   S   1   ExtraSamples                Number of extra color components (ex. alpha).
+0x0153   S   ?   SampleFormat                For each color component, the numerical format (unsigned, signed, floating point) of that component.
+0x0154   ?   ?   SMinSampleValue             For each color component, the minimum value of that component. See also @MinSampleValue.
+0x0155   ?   ?   SMaxSampleValue             For each color component, the maximum value of that component. See also @MaxSampleValue.
+0x0156   S   6   TransferRange               Table of values that extends the range of the transfer function.
+0x0200   S   1   JPEGProc                    JPEG compression process.
+0x0201   L   1   JPEGInterFormat             Offset to the start of a JPEG bitstream.
+0x0202   L   1   JPEGInterLength             Length, in bytes, of the JPEG bitstream.
+0x0203   S   1   JPEGRestartInterval         Length of the restart interval.
+0x0205   S   ?   JPEGLosslessPredictors      For each color component, a lossless predictor-selection value for that component.
+0x0206   S   ?   JPEGPointTransforms         For each color component, a point transformation value for that component.
+0x0207   L   ?   JPEGQTables                 For each color component, the offset to the quantization table for that component.
+0x0208   L   ?   JPEGDCTables                For each color component, the offset to the DC Huffman table (or lossless Huffman table) for that component.
+0x0209   L   ?   JPEGACTables                For each color component, the offset to the AC Huffman table for that component.
+0x0211   R   3   YCbCrCoefficients           Coefficients for transformation from RGB to YCbCr image data.
+0x0212   S   2   YCbCrSubsampling            Sampling ratio of chrominance components in relation to the luminance component.
+0x0213   S   1   YCbCrPositioning            Position of chrominance components in relation to the luminance component.
+0x0214   R   6   REFBlackWhite               Reference black point value and reference white point value.
+0x0301   R   1   Gamma                       Gamma value as a rational value with numerator 100000 (ex, 2.2 == [100000, 45455]).
+0x0302   A   L   ICCProfileDescriptor        Identification string of an ICC profile.
+0x0303   B   1   SRGBRenderingIntent         Rendering intent as defined by ICC. For GDI+, image object must be constructed with ICM. 0: perceptual, 1: relative colorimetric, 2: saturation, 3: absolute colorimetric.
+0x0320   A   L   ImageTitle                  Title of the image.
+0x5001   S   1   ResolutionXUnit             Units of H-resolution. 1: pixels/inch, 2: pixels/centimeter.
+0x5002   S   1   ResolutionYUnit             Units of V-resolution. 1: pixels/inch, 2: pixels/centimeter.
+0x5003   S   1   ResolutionXLengthUnit       Units of image width.  1: inch, 2: centimeter, 3: points, 4: picas, 5: columns.
+0x5004   S   1   ResolutionYLengthUnit       Units of image height. 1: inch, 2: centimeter, 3: points, 4: picas, 5: columns.
+0x5005   A   ?   PrintFlags                  Sequence of one-byte Boolean values that specify printing options.
+0x5006   S   1   PrintFlagsVersion           Print flags version.
+0x5007   B   1   PrintFlagsCrop              Print flags center crop marks.
+0x5008   L   1   PrintFlagsBleedWidth        Print flags bleed width.
+0x5009   S   1   PrintFlagsBleedWidthScale   Print flags bleed width scale.
+0x500A   R   1   HalftoneLPI                 Ink's screen frequency, in lines per inch.   
+0x500B   S   1   HalftoneLPIUnit             Units for the screen frequency. 1: lines/inch 2: lines/cm.
+0x500C   R   1   HalftoneDegree              Angle for screen.
+0x500D   S   1   HalftoneShape               Shape of the halftone dots: 0: round, 1: ellipse, 2: line, 3: square, 4: cross, 6: diamond.
+0x500E   L   1   HalftoneMisc                Miscellaneous halftone information.
+0x500F   B   1   HalftoneScreen              Whether to use the printer's default screens. 1: Use default screens, 2: Other.
+0x5010   S   ?   JPEGQuality                 Private tag used by the Adobe Photoshop format.
+0x5011   U   ?   GridSize                    Block of information about grids and guides.
+0x5012   L   1   ThumbnailFormat             Format of the thumbnail image. 0: Raw RGB, 1: JPEG
+0x5013   L   1   ThumbnailWidth              Width  of the thumbnail image, in pixels.
+0x5014   L   1   ThumbnailHeight             Height of the thumbnail image, in pixels.
+0x5015   S   1   ThumbnailColorDepth         Bits per pixel for the thumbnail image.
+0x5016   S   1   ThumbnailPlanes             Number of color planes for the thumbnail image.
+0x5017   L   1   ThumbnailRawBytes           Byte offset between rows of pixel data.
+0x5018   L   1   ThumbnailSize               Total size, in bytes, of the thumbnail image.
+0x5019   L   1   ThumbnailCompressedSize     Compressed size, in bytes, of the thumbnail image.
+0x501A   U   ?   ColorTransferFunction       Table of values that specify color transfer functions.
+0x501B   B   ?   ThumbnailData               Raw thumbnail bits in JPEG or RGB format. Depends on @ThumbnailFormat.
+0x5020   SL  1   ThumbnailImageWidth         Number of pixels per row in the thumbnail image.
+0x5021   SL  1   ThumbnailImageHeight        Number of pixel rows in the thumbnail image.
+0x5022   S   ?   ThumbnailBitsPerSample      Number of bits per color component in the thumbnail image. See also @ThumbnailSamplesPerPixel.
+0x5023   S   1   ThumbnailCompression        Compression scheme used for thumbnail image data.
+0x5024   S   1   ThumbnailPhotometricInterp  Thumbnail counterpart of @PhotometricInterp
+0x5025   A   L   ThumbnailImageDescription   Thumbnail counterpart of @ImageDescription.
+0x5026   A   L   ThumbnailEquipMake          Thumbnail counterpart of @EquipMake
+0x5027   A   L   ThumbnailEquipModel         Thumbnail counterpart of @EquipModel.
+0x5028   SL  ?   ThumbnailStripOffsets       Thumbnail counterpart of @StripOffsets.
+0x5029   S   1   ThumbnailOrientation        Thumbnail counterpart of @Orientation.
+0x502A   S   1   ThumbnailSamplesPerPixel    Thumbnail counterpart of @SamplesPerPixel.
+0x502B   SL  1   ThumbnailRowsPerStrip       Thumbnail counterpart of @RowsPerStrip.
+0x502C   SL  ?   ThumbnailStripBytesCount    Thumbnail counterpart of @StripBytesCount.
+0x502D   ?   ?   ThumbnailResolutionX        Thumbnail counterpart of @XResolution. Unit is set by @ThumbnailResolutionUnit.
+0x502E   ?   ?   ThumbnailResolutionY        Thumbnail counterpart of @YResolution. Unit is set by @ThumbnailResolutionUnit.
+0x502F   S   1   ThumbnailPlanarConfig       Thumbnail counterpart of @PlanarConfig.
+0x5030   S   1   ThumbnailResolutionUnit     Unit of measure for @ThumbnailResolution[XY]. See also @ResolutionUnit.
+0x5031   S   ?   ThumbnailTransferFunction   Thumbnail counterpart of @TransferFunction.
+0x5032   A   L   ThumbnailSoftwareUsed       Thumbnail counterpart of @SoftwareUsed.
+0x5033   A   20  ThumbnailDateTime           Thumbnail counterpart of @DateTime.
+0x5034   A   L   ThumbnailArtist             Thumbnail counterpart of @Artist.
+0x5035   R   2   ThumbnailWhitePoint         Thumbnail counterpart of @WhitePoint.
+0x5036   R   6   ThumbnailPrimaryChromaticities  Thumbnail counterpart of @PrimaryChromaticities.
+0x5037   R   3   ThumbnailYCbCrCoefficients  Thumbnail counterpart of @YCbCrCoefficients.
+0x5038   S   2   ThumbnailYCbCrSubsampling   Thumbnail counterpart of @YCbCrSubsampling.
+0x5039   S   1   ThumbnailYCbCrPositioning   Thumbnail counterpart of @YCbCrPositioning.
+0x503A   R   6   ThumbnailRefBlackWhite      Thumbnail counterpart of @REFBlackWhite.
+0x503B   A   L   ThumbnailCopyRight          Thumbnail counterpart of @Copyright.
+0x5090   S   64  LuminanceTable              Luminance table to control JPEG quality.
+0x5091   S   64  ChrominanceTable            Chrominance table to control JPEG quality.
+0x5100   L   ?   FrameDelay                  Time delay, in hundredths of a second, between two frames in an animated GIF image.
+0x5101   S   1   LoopCount                   For an animated GIF image, the number of times to display the animation; 0 - infinite.
+0x5102   B   ?   GlobalPalette               Color palette for an indexed bitmap in a GIF image.
+0x5103   B   1   IndexBackground             Index of the background color in the palette of a GIF image.
+0x5104   B   1   IndexTransparent            Index of the transparent color in the palette of a GIF image.
+0x5110   B   1   PixelUnit                   Unit of measure for @PixelPerUnit[XY].
+0x5111   L   1   PixelPerUnitX               Pixels per unit in the X-direction.
+0x5112   L   1   PixelPerUnitY               Pixels per unit in the Y-direction.
+0x5113   B   ?   PaletteHistogram            Palette histogram.
+0x8298   A   L   Copyright                   Copyright information.
+0x829A   R   1   ExifExposureTime            Exposure time, in seconds.
+0x829D   R   1   ExifFNumber                 F-number.
+0x8769   L   1   ExifIFD                     Private tag used by GDI+ to locate EXIF-specific information.
+0x8773   B   ?   ICCProfile                  ICC profile embedded in the image.
+0x8822   S   1   ExifExposureProg            Program used to set exposure, default is 0. 0: not defined, 1: manual, 2: normal program, 3: aperture priority, 4: shutter priority, 5: creative program  (biased toward depth of field), 6: action program (biased toward fast shutter speed), 7: portrait mode, 8: landscape mode, 9..255: reserved.
+0x8824   A   L   ExifSpectralSense           Spectral sensitivity of each channel of the camera used. Compatible with the ASTM Technical Committee standard.
+0x8825   L   1   GpsIFD                      Offset to a block of GPS property items. GDI+ uses this tag to locate GPS information. Not for public use.
+0x8827   S   ?   ExifISOSpeed                ISO speed and ISO latitude of the camera or input device as specified in ISO 12232.
+0x8828   U   ?   ExifOECF                    Optoelectronic conversion function (OECF) specified in ISO 14524.
+0x9000   U   4   ExifVer                     Version of the EXIF standard supported. Conformance to the standard is indicated by recording '0210' as a 4-byte ASCII string.
+0x9003   A   20  ExifDTOrig                  Date and time when the original image data was generated.
+0x9004   A   20  ExifDTDigitized             Date and time when the image was stored as digital data.
+0x9101   U   4   ExifCompConfig              Information specific to compressed data. Specifies the order of four components. Default: '4 5 6 0' (uncompressed RGB), '1 2 3 0' (other). 0: no channel, 1: Y, 2: Cb, 3: Cr, 4: R, 5: G, 6: B, other: reserved.
+0x9102   R   1   ExifCompBPP                 Information specific to compressed data. The compression mode used for a compressed image is indicated in unit BPP.
+0x9201   Z   1   ExifShutterSpeed            Shutter speed. The unit is the Additive System of Photographic Exposure (APEX) value.
+0x9202   R   1   ExifAperture                Lens aperture. The unit is the APEX value.
+0x9203   Z   1   ExifBrightness              Brightness value. The unit is the APEX value. Usually from -99.99 to 99.99.
+0x9204   Z   1   ExifExposureBias            Exposure bias. The unit is the APEX value. Usually from -99.99 to 99.99.
+0x9205   R   1   ExifMaxAperture             Smallest F number of the lens. The unit is the APEX value. Usually from 00.00 to 99.99.
+0x9206   R   1   ExifSubjectDist             Distance to the subject, measured in meters.
+0x9207   S   1   ExifMeteringMode            Metering mode. Default: 0.  0: Unknown, 1: Average, 2: CenterWeightedAverage, 3: Spot, 4: MultiSpot, 5: Pattern, 6: Partial, 7..254: Reserved, 255: Other.
+0x9208   S   1   ExifLightSource             Type of light source. Default: 0.  0: Unknown, 1: Daylight, 2: Flourescent, 3: Tungsten, 17: Standard Light A, 18: Standard Light B, 19: Standard Light C, 20: D55, 21: D65, 22: D75, 23..254: Reserved, 255: Other.
+0x9209   S   1   ExifFlash                   Flash status.  0x0 - Flash didn't fire, 0x1 - Flash fired, 0x5 - Flash fired, strobe return light not detected.
+0x920A   R   1   ExifFocalLength             Actual focal length, in millimeters, of the lens.
+0x9214   ?   ?   ExifSubjectArea             
+0x927C   U   ?   ExifMakerNote               A tag used by manufacturers of EXIF writers to record information.
+0x9286   U   ?   ExifUserComment             A tag used by EXIF users to write keywords or comments about the image.
+0x9290   A   L   ExifDTSubsec                Fraction of a second for the @DateTime.
+0x9291   A   L   ExifDTOrigSS                Fraction of a second for the @ExifDTOrig.
+0x9292   A   L   ExifDTDigSS                 Fraction of a second for the @ExifDTDigitized.
+0xA000   U   4   ExifFPXVer                  FlashPix format version supported by an FPXR file. Support marked by recording '0100' as a 4-byte ASCII string.
+0xA001   S   1   ExifColorSpace              Color space specifier.  0x0001: sRGB, 0xFFFF: uncalibrated.
+0xA002   SL  1   ExifPixXDim                 Width  of the meaningful image. Information specific to compressed data. This tag should not exist in an uncompressed file.
+0xA003   SL  1   ExifPixYDim                 Height of the meaningful image. Information specific to compressed data. This tag should not exist in an uncompressed file.
+0xA004   A   13  ExifRelatedWav              The name of an audio file related to the image data, in 8.3 format. Audio files must be recorded in conformance with the EXIF audio format.
+0xA005   L   1   ExifInterop                 Offset to a block of property items that contain interoperability information.
+0xA20B   R   1   ExifFlashEnergy             Strobe energy, in Beam Candle Power Seconds (BCPS), at the time the image was captured.
+0xA20C   U   ?   ExifSpatialFR               Camera or input device spatial frequency table and SFR values as specified in ISO 12233.
+0xA20E   R   1   ExifFocalXRes               X-Resolution, in pixels per unit, on the camera focal plane. Unit is set by @ExifFocalResUnit.
+0xA20F   R   1   ExifFocalYRes               Y-Resolution, in pixels per unit, on the camera focal plane. Unit is set by @ExifFocalResUnit.
+0xA210   S   1   ExifFocalResUnit            Unit of measure for @ExifFocal[XY]Res.  2: inch, 3: centimeter.
+0xA214   S   2   ExifSubjectLoc              Location of the main subject in the scene. The value of this tag represents the pixel at the center of the main subject.
+0xA215   R   1   ExifExposureIndex           Exposure index selected on the camera or input device at the time the image was captured.
+0xA217   S   1   ExifSensingMethod           Image sensor type on the camera or input device.  1: undefined, 2: one-chip color area sensor, 3: two-chip color area sensor, 4: three-chip color area sensor, 5: color sequential area sensor, 7: trilinear sensor, 8: color sequential linear sensor, other: reserved.
+0xA300   U   1   ExifFileSource              The image source. If a DSC recorded the image, the value of this tag is 3.
+0xA301   U   1   ExifSceneType               The type of scene. If a DSC recorded the image, the value of this tag must be set to 1, indicating that the image was directly photographed.
+0xA302   U   ?   ExifCfaPattern              The color filter array (CFA) geometric pattern of the image sensor when a one-chip color area sensor is used.
+0xA401   ?   ?   ExifCustomRendered          
+0xA402   ?   ?   ExifExposureMode            
+0xA403   ?   ?   ExifWhiteBalance            
+0xA404   ?   ?   ExifDigitalZoomRatio        
+0xA405   ?   ?   ExifFocalLengthIn35mmFilm   
+0xA406   ?   ?   ExifSceneCaptureType        
+0xA407   ?   ?   ExifGainControl             
+0xA408   ?   ?   ExifContrast                
+0xA409   ?   ?   ExifSaturation              
+0xA40A   ?   ?   ExifSharpness               
+0xA40B   ?   ?   ExifDeviceSettingDesc       
+0xA40C   ?   ?   ExifSubjectDistanceRange    
+0xA420   ?   ?   ExifUniqueImageID           
