@@ -1,7 +1,7 @@
-﻿; OGdip v3.0.2
+﻿; OGdip v3.0.3
 ; Written by @mcl
 ; Many thanks to all members of AHK community, especially:
-; @GeekDude, @Rseding91, @SKAN, @iseahound, @justme, @mikeyww, @robodesign, @tic
+; @GeekDude, @iseahound, @justme, @mikeyww, @neogna2, @robodesign, @Rseding91, @SKAN, @tic,
 ; and, of course, @lexicos.
 
 
