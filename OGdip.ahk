@@ -7613,7 +7613,7 @@ Class OGdip {
 		
 		
 		; Marks last point in the path as a marker.
-		; You can then split path into subpaths with .SplitByMarkers method.
+		; You can then split path into subpaths with .GetMarkedSubpaths method.
 		
 		SetMarker() {
 			DllCall("GdiPlus\GdipSetPathMarker"
